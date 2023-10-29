@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Кабінет користувача</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Кабінет користувача</h2>
+        {% if username %}
+            <div class="alert alert-success" role="alert">
+                Ви успішно увійшли в систему!
+            </div>
+            <p><strong>Логін:</strong> {{ username }}</p>
+
+        {% else %}
+            <p>Користувача з таким іменем не знайдено.</p>
+        {% endif %}
+
+        <a href="/logout" class="btn btn-danger">Вийти</a>
+    </div>
+</body>
+</html>
