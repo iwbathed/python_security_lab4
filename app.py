@@ -127,15 +127,6 @@ def register():
             else:
                 hashed_password = encrypt_password(password)
 
-
-                # otp_secret = request.form.get('otp_secret')
-                # print(otp_secret)
-                # print(otp_secret.replace('amp;', ''))
-                # otp_verif_code = request.form.get('otp_verif_code')
-                #
-                # res = pyotp.parse_uri(otp_secret.replace('amp;', '')).verify(otp_verif_code)
-                # print(res)
-
                 otp_secret = request.form.get('otp_secret')
                 otp_verif_code = request.form.get('otp_verif_code')
                 # Розділити otp_secret на параметри
@@ -173,13 +164,7 @@ def user(username):
     current_user = User.query.filter_by(username=username).first()
     if current_user:
         if current_user.is_authenticated and current_user.username == username:
-            if current_user.otp_secret:
-                # User has 2FA enabled; ask for the 2FA code
-                return render_template('login_2fa.html')
-            else:
-                # User does not have 2FA; proceed with the existing user page
-                return render_template('user.html', username=username)
-
+            return render_template('user.html', username=username)
         else:
             return "Доступ заборонено."
     else:
